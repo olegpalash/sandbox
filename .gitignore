@@ -12,3 +12,5 @@ sandbox-test-*
 *.o
 *.obj
 *.lst
+sandbox
+dub.selections.json
