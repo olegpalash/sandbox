@@ -8,8 +8,8 @@ class Map
 {
 	private Cell[]   cells;
 	private uint[][] data;
-	private uint     width;
-	private uint     height;
+	private uint     _width;
+	private uint     _height;
 
 	this(uint w, uint h)
 	{
@@ -21,8 +21,8 @@ class Map
 			line = new uint[w];
 		}
 
-		width  = w;
-		height = h;
+		_width  = w;
+		_height = h;
 	}
 
 	this(string path)
@@ -37,9 +37,25 @@ class Map
 			data ~= arr.map!(x => x.to!uint).array;
 		}
 
-		height = data.length;
-		width = data[0].length;
+		_height = data.length;
+		_width  = data[0].length;
 	}
+
+	const(Cell)* getCell(int x, int y)
+	{
+		return &cells[data[y][x]];
+	}
+
+	@property uint width()
+	{
+		return _width;
+	}
+
+	@property uint height()
+	{
+		return _height;
+	}
+
 
 	private void setDefaultCells()
 	{

@@ -1,6 +1,8 @@
 import derelict.sdl2.sdl;
 import std.string;
 import std.exception;
+import map;
+import cell;
 
 static this()
 {
@@ -50,5 +52,40 @@ class Window
 	{
 		SDL_DestroyRenderer(renderer);
 		SDL_DestroyWindow(window);
+	}
+
+	public void showMap(Map mp, int offX, int offY, int sz)
+	{
+		SDL_RenderClear(renderer);
+
+		int w = width/sz;
+		int h = height/sz;
+
+		for (int i = 0; i < h; i++)
+		{
+			int y = i+offY;
+			if (y >= mp.height) break;
+			if (y < 0) continue;
+
+			for (int j = 0; j < w; j++)
+			{
+				int x = j+offX;
+				if (x >= mp.width) break;
+				if (x < 0) continue;
+
+				const(Cell)* c = mp.getCell(x, y);
+
+				SDL_Rect r;
+				r.x = j*sz;
+				r.y = i*sz;
+				r.w = r.h = sz;
+			
+				SDL_SetRenderDrawColor(renderer, c.color.r, c.color.g, c.color.b, 255);
+				SDL_RenderFillRect(renderer, &r);
+		
+			}
+		}
+	
+		SDL_RenderPresent(renderer);
 	}
 }
