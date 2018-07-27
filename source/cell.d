@@ -21,5 +21,6 @@ struct Material
 struct Cell
 {
 	Material* material;
+	alias material this;
 }
 
