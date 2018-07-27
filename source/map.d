@@ -53,9 +53,19 @@ class Map
 		_width  = data[0].length;
 	}
 
-	ref Cell getCell(int x, int y)
+	deprecated ref Cell getCell(int x, int y)
 	{
 		return data[y][x];
+	}
+
+	void swapCells(uint i1, uint j1, uint i2, uint j2)
+	{
+		swap(data[i1][j1], data[i2][j2])
+	}
+
+	ref Cell opIndex(uint i, uint j)
+	{
+		return data[i][j];
 	}
 
 	@property uint width()
