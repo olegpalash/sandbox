@@ -2,23 +2,27 @@ import cell;
 import std.stdio;
 import std.array: array, split;
 import std.conv;
-import std.algorithm: map;
+import std.algorithm: map, swap;
 
 class Map
 {
-	private Cell[]   cells;
-	private uint[][] data;
-	private uint     _width;
-	private uint     _height;
+	private Material[] materials;
+	private Cell[][]   data;
+	private uint       _width;
+	private uint       _height;
 
 	this(uint w, uint h)
 	{
-		setDefaultCells();
+		setDefaultMaterials();
 
-		data = new uint[][h];
+		data = new Cell[][h];
 		foreach(ref line; data)
 		{
-			line = new uint[w];
+			line = new Cell[w];
+			foreach(ref c; line)
+			{
+				c.material = &materials[0];
+			}
 		}
 
 		_width  = w;
@@ -27,23 +31,31 @@ class Map
 
 	this(string path)
 	{
-		setDefaultCells();
+		setDefaultMaterials();
 
 		File f = File(path, "r");
 
 		foreach (line; f.byLine())
 		{
-			auto arr = line.split();
-			data ~= arr.map!(x => x.to!uint).array;
+			auto   arr = line.split();
+			Cell[] d;
+
+			foreach (v; arr)
+			{
+				uint id = v.to!uint;
+				auto mat = &materials[id];
+				d ~= Cell(mat);
+			}
+			data ~= d;
 		}
 
 		_height = data.length;
 		_width  = data[0].length;
 	}
 
-	const(Cell)* getCell(int x, int y)
+	ref Cell getCell(int x, int y)
 	{
-		return &cells[data[y][x]];
+		return data[y][x];
 	}
 
 	@property uint width()
@@ -56,12 +68,11 @@ class Map
 		return _height;
 	}
 
-
-	private void setDefaultCells()
+	private void setDefaultMaterials()
 	{
-		cells = [
-			Cell(CellType.empty, CellColor(0,0,32)), 
-			Cell(CellType.solid, CellColor(128,128,128)),
-			Cell(CellType.powder, CellColor(255,192,0))];
+		materials = [
+			Material(CellType.empty, CellColor(0,0,32)), 
+			Material(CellType.solid, CellColor(128,128,128)),
+			Material(CellType.powder, CellColor(255,192,0))];
 	}
 }

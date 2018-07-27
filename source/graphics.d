@@ -73,14 +73,14 @@ class Window
 				if (x >= mp.width) break;
 				if (x < 0) continue;
 
-				const(Cell)* c = mp.getCell(x, y);
+				auto c = mp.getCell(x, y).material.color;
 
 				SDL_Rect r;
 				r.x = j*sz;
 				r.y = i*sz;
 				r.w = r.h = sz;
 			
-				SDL_SetRenderDrawColor(renderer, c.color.r, c.color.g, c.color.b, 255);
+				SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, 255);
 				SDL_RenderFillRect(renderer, &r);
 		
 			}

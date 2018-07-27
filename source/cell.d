@@ -12,9 +12,14 @@ struct CellColor
 	ubyte b;
 }
 
-struct Cell
+struct Material
 {
 	CellType  type;
 	CellColor color;
+}
+
+struct Cell
+{
+	Material* material;
 }
 
