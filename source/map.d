@@ -80,7 +80,7 @@ class Map
 
 	Material* getMaterial(uint id)
 	{
-		return materials[id];
+		return &materials[id];
 	}
 
 	private void setDefaultMaterials()
