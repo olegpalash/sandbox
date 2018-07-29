@@ -78,6 +78,11 @@ class Map
 		return _height;
 	}
 
+	Material* getMaterial(uint id)
+	{
+		return materials[id];
+	}
+
 	private void setDefaultMaterials()
 	{
 		materials = [
