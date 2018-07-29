@@ -60,7 +60,7 @@ class Map
 
 	void swapCells(uint i1, uint j1, uint i2, uint j2)
 	{
-		swap(data[i1][j1], data[i2][j2])
+		swap(data[i1][j1], data[i2][j2]);
 	}
 
 	ref Cell opIndex(uint i, uint j)
