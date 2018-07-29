@@ -41,6 +41,8 @@ class Engine
 				}
 			}
 		}
+
+		_t++;
 	}
 
 	private bool left()
