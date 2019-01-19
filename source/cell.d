@@ -2,7 +2,8 @@ enum CellType
 {
 	empty,
 	solid,
-	powder
+	powder,
+	liquid
 }
 
 struct CellColor

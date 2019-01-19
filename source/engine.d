@@ -34,6 +34,31 @@ class Engine
 
 				if (c.type == CellType.powder)
 				{
+					if (_map[i+1, j].type == CellType.empty ||
+						_map[i+1, j].type == CellType.liquid)
+					{
+						_map.swapCells(i, j, i+1, j);
+						_used[i+1][j] = true;
+					}
+					else if (j > 0 && 
+						left() &&
+						(_map[i+1, j-1].type == CellType.empty ||
+						 _map[i+1, j-1].type == CellType.liquid))
+					{
+						_map.swapCells(i, j, i+1, j-1);
+						_used[i+1][j-1] = true;
+					}
+					else if (j < _map.width-1 && 
+						right() &&
+						(_map[i+1, j+1].type == CellType.empty ||
+						 _map[i+1, j+1].type == CellType.liquid))
+					{
+						_map.swapCells(i, j, i+1, j+1);
+						_used[i+1][j+1] = true;
+					}
+				}
+				else if (c.type == CellType.liquid)
+				{
 					if (_map[i+1, j].type == CellType.empty)
 					{
 						_map.swapCells(i, j, i+1, j);
@@ -52,6 +77,20 @@ class Engine
 					{
 						_map.swapCells(i, j, i+1, j+1);
 						_used[i+1][j+1] = true;
+					}
+					else if (j > 0 && 
+						left() &&
+						_map[i, j-1].type == CellType.empty)
+					{
+						_map.swapCells(i, j, i, j-1);
+						_used[i][j-1] = true;
+					}
+					else if (j < _map.width-1 && 
+						right() &&
+						_map[i, j+1].type == CellType.empty)
+					{
+						_map.swapCells(i, j, i, j+1);
+						_used[i][j+1] = true;
 					}
 				}
 			}

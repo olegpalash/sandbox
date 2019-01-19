@@ -88,6 +88,7 @@ class Map
 		materials = [
 			Material(CellType.empty, CellColor(0,0,32)), 
 			Material(CellType.solid, CellColor(128,128,128)),
-			Material(CellType.powder, CellColor(255,192,0))];
+			Material(CellType.powder, CellColor(255,192,0)),
+			Material(CellType.liquid, CellColor(64,128,255))];
 	}
 }

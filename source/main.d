@@ -58,6 +58,10 @@ int main(string[] args)
 			{
 				tp = 2;
 			}
+			else if (k == SDLK_3)
+			{
+				tp = 3;
+			}
 			else if (k == SDLK_SPACE)
 			{
 				eng.update();
