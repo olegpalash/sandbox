@@ -14,3 +14,4 @@ sandbox-test-*
 *.lst
 sandbox
 dub.selections.json
+*.map

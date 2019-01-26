@@ -1,4 +1,6 @@
 import std.stdio;
+import std.datetime.systime;
+import std.format;
 import graphics;
 import map;
 import input;
@@ -66,6 +68,17 @@ int main(string[] args)
 			{
 				eng.update();
 				redraw = true;
+			}
+			else if (k == SDLK_F2)
+			{
+				SysTime t = Clock.currTime();
+
+				string path = format("save%02s%02s%02s.map",
+					t.hour,
+					t.minute,
+					t.second);
+
+				m.save(path);
 			}
 		}
 		else if (inp.wasButtonPressed())

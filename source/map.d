@@ -53,6 +53,35 @@ class Map
 		_width  = data[0].length;
 	}
 
+	void save(string path)
+	{
+		File f = File(path, "w");
+
+		for (int i = 0; i < _height; i++)
+		{
+			for (int j = 0; j < _width; j++)
+			{
+				Material* m = data[i][j].material;
+
+				bool found = false;
+
+				for(int k = 0; k < materials.length; k++)
+				{
+					if (*m == materials[k])
+					{
+						f.write(k, ' ');
+						found = true;
+						break;
+					}
+				}
+
+				if (!found) f.write(0, ' ');
+			}
+
+			f.writeln();
+		}
+	}
+
 	deprecated ref Cell getCell(int x, int y)
 	{
 		return data[y][x];
